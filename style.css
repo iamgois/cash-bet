@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --color-primary: #fc2f68;
+    --color-danger: #fc2f68;
+    --color-sucess: #f9ebc4;
+    --color-warning: #ffb391;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #472f5f;
+    --color-dark-variant: #677483;
+    --color-background: #181a1e;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: poppins;
+}
+
+body{
+    background-color: var(--color-background);
+    color: var(--color-white);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes opacity{
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+
+.opacity{
+    animation: opacity .5s ease-in-out;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game > div{
+    margin-top: 20px;
+}
+
+.game > div > button{
+    width: 150px;
+    height: 50px;
+}
+
+#vermelho{
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+#vermelho:hover{
+    background: #bc1a48;
+    cursor: pointer;
+}
+
+#preto{
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+#preto:hover{
+    background: #232630;
+    cursor: pointer;
+}
+
+#resultado{
+    margin-top: 20px;
+}
+
+#saldo{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+}
+
+#regras{
+    position: absolute;
+    bottom: 5px;
+    font-size: 8px;
+}

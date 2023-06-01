@@ -1,52 +1,106 @@
 const vermelho = document.getElementById('vermelho');
 const preto = document.getElementById('preto');
+const branco = document.getElementById('branco');
+const title = document.getElementById('title');
+const buttons = document.getElementById('buttons');
+
 const resultado = document.getElementById('resultado');
-const cores = ['vermelho', 'preto'];
 const valor = document.getElementById('valor');
 
-let pot = 10
+const vitoria = document.getElementById('vitoria');
+
+let pot = 10;
 valor.innerHTML = pot
 
-
-/* Botões */
-
 vermelho.addEventListener('click', () => {
-
-    /* Valores */
-    pot -= 1
-
-    const num = Math.random().toFixed(0)
-    resultado.classList.add('opacity')
-
-    setInterval(function () { resultado.classList.remove('opacity') }, 1000);
-
-    if (num == 0) {
-        pot += 2
-        valor.innerHTML = pot
-    } else {
-        valor.innerHTML = pot
+    if(pot > 0){
+        localStorage.setItem('Cor', 'Vermelho');
+        resultado.innerHTML = ''
+        vitoria.innerHTML = ''
+        buttons.style.display = 'none';
+        title.style.display = 'none';
+        realizarSorteio();
+        pot -= 1;
+        return valor.innerHTML = pot;
+    } else{
+        vitoria.innerHTML = `Saldo insuficiente`
     }
-
-
-    return resultado.innerHTML = cores[num]
 })
 
 preto.addEventListener('click', () => {
+    if(pot > 0){
+        localStorage.setItem('Cor', 'Preto');
+        resultado.innerHTML = ''
+        vitoria.innerHTML = ''
+        buttons.style.display = 'none';
+        title.style.display = 'none';
+        realizarSorteio();
+        pot -= 1;
+        return valor.innerHTML = pot;
+    } else{
+        vitoria.innerHTML = 'Saldo insuficiente'
+    }
+})
+branco.addEventListener('click', () => {
+    if(pot > 0){
+        localStorage.setItem('Cor', 'Branco');
+        resultado.innerHTML = ''
+        vitoria.innerHTML = ''
+        buttons.style.display = 'none';
+        title.style.display = 'none';
+        realizarSorteio();
+        pot -= 1;
+        return valor.innerHTML = pot;
+    } else{
+        vitoria.innerHTML = 'Saldo insuficiente'
+    }
+})
 
-    /* Valores */
-    pot -= 1
+function realizarSorteio() {
+  // Gera um número aleatório de 0 a 100
+  const numero = Math.floor(Math.random() * 101);
 
-    const num = Math.random().toFixed(0)
-    resultado.classList.add('opacity')
+  let cor;
 
-    setInterval(function () { resultado.classList.remove('opacity') }, 1000);
+  if (numero === 100) {
+    cor = 'Branco';
+  } else if (numero % 2 === 0) {
+    cor = 'Vermelho';
+  } else {
+    cor = 'Preto';
+  }
 
-    if (num == 1) {
-        pot += 2
-        valor.innerHTML = pot
-    } else {
+  // Exibe o contador de 5 segundos
+  let contador = 5;
+  const interval = setInterval(() => {
+    console.log(`Contagem regressiva: ${contador} segundo(s)`);
+    resultado.innerHTML = contador
+    contador--;
+
+    if (contador === -1) {
+      clearInterval(interval);
+      exibirResultado(numero, cor);
+    }
+  }, 1000);
+}
+
+function exibirResultado(numero, cor) {
+    buttons.style.display = 'initial';
+    title.style.display = 'block';
+
+  console.log(`O número sorteado foi ${numero}, cor: ${cor}`);
+  if(cor === localStorage.getItem('Cor')){
+    console.log('Você ganhou!')
+    vitoria.innerHTML = `Parabéns, você ganhou!`
+    pot += 2
+    if(cor === 'Branco'){
+        pot += 8
         valor.innerHTML = pot
     }
-
-    return resultado.innerHTML = cores[num]
-})
+    valor.innerHTML = pot
+} else{
+    console.log('Não foi dessa vez!')
+    vitoria.innerHTML = `Não foi dessa vez!`
+  }
+  resultado.innerHTML = `${cor}`
+}
